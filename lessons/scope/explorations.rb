@@ -75,8 +75,8 @@ require 'pry'
 ## Example 13
 
 # def print_variable(x)
-# x = 4
-# puts x
+#   x = 4
+#   puts x
 # end
 
 # print_variable(2)

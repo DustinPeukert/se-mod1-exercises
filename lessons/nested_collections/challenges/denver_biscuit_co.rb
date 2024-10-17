@@ -105,17 +105,29 @@ denver_biscuit_co = {
 
 # Challenge 1:
 # Return the name ("Denver Biscuit")
+denver_biscuit_co[:name]
 # Return the rating (4.5)
+denver_biscuit_co[:rating]
 # Return a list of accepted transactions (["pickup", "delivery"])
+denver_biscuit_co[:transactions]
 # Return the first listed category title ("Sandwiches")
+denver_biscuit_co[:categories][0][:title]
 # Return the opening hour on Tuesday (day 1) ("0800")
+denver_biscuit_co[:hours][0][:open][1][:start]
 # Return the closing hour on Saturday (day 5) ("1500")
+denver_biscuit_co[:hours][0][:open][5][:end]
 # Return the current open status (is_now_open) (true)
+denver_biscuit_co[:hours][0][:is_open_now]
 
 # Challenge 2: 
-# Get the address, and return it into a readable format. ("3237 E Colfax Ave, Denver, CO 80206" )
+# Get the address, and return it into a readable format. ("3237 E Colfax Ave, Denver, CO 80206")
+denver_biscuit_co[:location][:display_address].join(", ")
 # Return a list of categories this restaurant fits into (["Sandwiches", "Breakfast & Brunch"])
-
+categories = []
+denver_biscuit_co[:categories].each do |category|
+    categories << category[:title]
+end
+p categories
 
 # Challenge 3 (extra spicy): 
 # Get the operation hours, and format a return value such that it looks like this: 
@@ -136,6 +148,15 @@ denver_biscuit_co = {
 #         ...
 #         ...
 #         ....
-
 # }
 # Note: day 0 is Monday, day 6 is Sunday
+symbol_days = [:Monday, :Tuesday, :Wednesday, :Thursday, :Friday, :Saturday, :Sunday]
+operation_hours = {}
+
+symbol_days.each_with_index do |day, index|
+    day_operations = {start: denver_biscuit_co[:hours][0][:open][index][:start], 
+                      end: denver_biscuit_co[:hours][0][:open][index][:end]}
+    operation_hours[day] = day_operations
+end
+
+pp operation_hours
